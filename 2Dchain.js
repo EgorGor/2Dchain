@@ -26,7 +26,7 @@ function main_2Dchain() {
 	var N = +(document.getElementById('number_quantity').value);	//Количество частиц
 	var nf = point_chain.value - 1;	//номер частицы, на которую действует сила
     
-	var F = [N];	//сила
+	var F = [N];	//Сила
     var U1 = [N];	//Скорость
     var U2 = [N];	//Ускорение
     var r = [N];	//Радиус-вектор
@@ -36,7 +36,7 @@ function main_2Dchain() {
 	var P = 0; var _P = 0;	//Потенциальная энергия
 	var E = 0; var _E = 0;	// Максимальная энерния
 	
-	var tol = 1 / 4		//Отношение ширины пружинки к радиусу шара
+	var tol = 1 / 4;		//Отношение толщины пружинки к радиусу шара
 	var graph = 5000;	//Коэффициент растяжения графика
 	var rast = 1/5;		//Отношение расстояния частицы до края поля к ширине (высоте) поля
 	var b = w * rast;	//Расстояние от первой(и последней) частицы до края
@@ -45,7 +45,7 @@ function main_2Dchain() {
 
 	for(var i = 0; i < N; i++)	//Задаём начальные условия
     {
-        r[i] = new Vector(i * a, 0)
+        r[i] = new Vector(i * a, 0);
         U1[i] = new Vector(0, 0);
         U2[i] = new Vector(0, 0);
         F[i] = new Vector(0, 0);
@@ -84,7 +84,6 @@ function main_2Dchain() {
     }
 	
 	F[nf] = new Vector(+(document.getElementById('number_prX').value), +(document.getElementById('number_prY').value));
-	console.log(abs(F[nf]))
 	
 	//finish
 	}
