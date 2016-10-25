@@ -27,7 +27,6 @@ function main_2Dchain() {
 	var nf = point_chain.value - 1;	//номер частицы, на которую действует сила
     
 	var F = [N];	//сила
-    var U = [N];	//Смещение
     var U1 = [N];	//Скорость
     var U2 = [N];	//Ускорение
     var r = [N];	//Радиус-вектор
@@ -37,14 +36,16 @@ function main_2Dchain() {
 	var P = 0; var _P = 0;	//Потенциальная энергия
 	var E = 0; var _E = 0;	// Максимальная энерния
 	
-	var rad =  w / ( N - 1 ) / 5	//Радиус частицы
-	var b = 13 * w / 70;	//Расстояние от первой(и последней) частицы до края
+	var tol = 1 / 4		//Отношение ширины пружинки к радиусу шара
+	var graph = 5000;	//Коэффициент растяжения графика
+	var rast = 1/5;		//Отношение расстояния частицы до края поля к ширине (высоте) поля
+	var b = w * rast;	//Расстояние от первой(и последней) частицы до края
+	var rad =  b / ( N - 1 ) 	//Радиус частицы
 	var sc = ( w - 2 * b ) / ( N - 1 ) / a;	//Масштаб 
 
 	for(var i = 0; i < N; i++)	//Задаём начальные условия
     {
         r[i] = new Vector(i * a, 0)
-		U[i] = new Vector(0, 0);
         U1[i] = new Vector(0, 0);
         U2[i] = new Vector(0, 0);
         F[i] = new Vector(0, 0);
@@ -69,7 +70,7 @@ function main_2Dchain() {
 	 P = 0;
 	 E = 0;
 	 t = 0;
-	 rad =  w / ( N - 1 ) / 5;
+	 rad =  b / ( N - 1 );
 	 sc = ( w - 2 * b ) / ( N - 1 ) / a;
 	
 	for(var i = 0; i < N; i++)
@@ -102,7 +103,7 @@ function main_2Dchain() {
 		T = 0;
 		P = 0;
 		_t = t;
-		t += dt * 5000 / N;
+		t += dt * graph / N;
 		if(t >= w3) 
 		{
 			ctx3.clearRect(0, 0, w3, h3);
@@ -147,11 +148,11 @@ function main_2Dchain() {
 		
 		for(var i = 1; i < N; i++){			//Рисуем пружинки
 			
-			ctx.lineWidth = rad / 4;
+			ctx.lineWidth = rad * tol;
 			ctx.beginPath();                        
 			ctx.strokeStyle = "red"			
-			ctx.moveTo( b + r[i-1].x * sc, h / 5 - r[i-1].y * sc);                            
-			ctx.lineTo( b + r[i].x * sc, h / 5 - r[i].y * sc);                            
+			ctx.moveTo( b + r[i-1].x * sc, h * rast - r[i-1].y * sc);                            
+			ctx.lineTo( b + r[i].x * sc, h * rast - r[i].y * sc);                            
 			ctx.stroke();   
 			
 		}
@@ -159,7 +160,7 @@ function main_2Dchain() {
 		for(var i = 0; i < N; i++) {
 			
 			var xS = b + r[i].x * sc;
-			var yS =  h / 5 - r[i].y * sc;
+			var yS =  h * rast - r[i].y * sc;
 			
 			var gradient = ctx.createRadialGradient(xS, yS, rad , xS - rad / 5, yS - rad / 5, 0);	//Рисуем градиен для частиц
 		    
