@@ -76,7 +76,6 @@ function main_2Dchain() {
 	for(var i = 0; i < N; i++)
     {
         r[i] = new Vector(i * a, 0);
-		U[i] = new Vector(0, 0);
         U1[i] = new Vector(0, 0);
         U2[i] = new Vector(0, 0);
         F[i] = new Vector(0, 0);
