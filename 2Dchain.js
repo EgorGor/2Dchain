@@ -93,6 +93,9 @@ function main_2Dchain() {
 		draw();
 	}
 	function physics() {	//Расчёт
+	
+		k = +(document.getElementById('point_k').value);
+		F[nf] = new Vector(+(document.getElementById('number_prX').value), +(document.getElementById('number_prY').value));
 		
 		_T = T;
 		_P = P;
@@ -195,25 +198,25 @@ function main_2Dchain() {
 		
 		ctx2.fillText('E_Kin = ' + (T.toFixed(5)) , 30 , 14);
 		ctx2.fillText('E_Pot = ' + (P.toFixed(5)), 30 , 34);
-		ctx2.fillText('E_Full = ' + ( ( (T + P) / 2).toFixed(5)), 30 , 54);
+		ctx2.fillText('E_Full = ' + ( (T + P).toFixed(5)), 30 , 54);
 		
 		ctx3.beginPath();	//Рисуем график потенциальной энергии
-		ctx3.moveTo(_t, h3 - _P * h3 / E);			
-		ctx3.lineTo(t, h3 - P * h3 / E);
+		ctx3.moveTo(_t, +((h3 - _P.toFixed(10) * h3 / E)));			
+		ctx3.lineTo(t, +((h3 - P.toFixed(10) * h3 / E)));
 		ctx3.strokeStyle = '#FC00A3';
 		ctx3.lineWidth = '2';	
 		ctx3.stroke();
 		
 		ctx3.beginPath();	//Рисуем график кинетической энергии
-		ctx3.moveTo(_t, h3 - _T * h3 / E );			
-		ctx3.lineTo(t, h3 - T * h3 / E );
+		ctx3.moveTo(_t, h3 - _T.toFixed(2) * h3 / E );			
+		ctx3.lineTo(t, h3 - T.toFixed(2) * h3 / E );
 		ctx3.strokeStyle = '#00CFEB';
 		ctx3.lineWidth = '2';	
 		ctx3.stroke();
 		
 		ctx3.beginPath();	//Рисуем график полной энергии
-		ctx3.moveTo(_t, h3 - (_T + _P) * h3 / E);			
-		ctx3.lineTo(t, h3 - (T + P) * h3 / E);
+		ctx3.moveTo(_t, h3 - (_T + _P).toFixed(10) * h3 / E);			
+		ctx3.lineTo(t, h3 - (T + P).toFixed(10) * h3 / E);
 		ctx3.strokeStyle = '#F5D900';
 		ctx3.lineWidth = '2';	
 		ctx3.stroke();	
